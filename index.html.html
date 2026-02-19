@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red de Acompañamiento Hospitalario - MVP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-in { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- ============================================
+     PÁGINA DE INICIO (LANDING)
+     ============================================ -->
+<div id="page-home" class="min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-heart text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Red Hospitalaria</span>
+                </div>
+                <div class="flex space-x-4">
+                    <button onclick="showPage('login')" class="text-gray-600 hover:text-blue-600 font-medium">Iniciar sesión</button>
+                    <button onclick="showPage('register')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium">Ser voluntario</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="flex-grow relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block">Acompañamiento</span>
+                            <span class="block text-blue-600">Hospitalario</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Conectamos pacientes internados sin familiares con voluntarios verificados 
+                            para brindar apoyo emocional y acompañamiento humano en hospitales públicos.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <button onclick="showPage('register')" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                                    Quiero ser voluntario
+                                </button>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <button onclick="showPage('login')" class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                                    Acceder al sistema
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-blue-50 flex items-center justify-center">
+            <div class="text-center p-12">
+                <i class="fas fa-hospital-user text-9xl text-blue-200"></i>
+                <p class="mt-4 text-gray-500 font-medium">Hospital General de Prueba</p>
+                <p class="text-sm text-gray-400">Sistema Piloto MVP v1.0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cómo funciona -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-10">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Proceso</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900">¿Cómo funciona?</p>
+            </div>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-blue-600">1</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Registro</h3>
+                    <p class="text-gray-500">Los voluntarios se registran, aceptan el código de conducta y el equipo verifica sus datos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-blue-600">2</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Asignación</h3>
+                    <p class="text-gray-500">El coordinador asigna voluntarios a pacientes según disponibilidad y necesidades específicas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl font-bold text-blue-600">3</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Acompañamiento</h3>
+                    <p class="text-gray-500">El voluntario realiza visitas presenciales, registrando tiempo y observaciones en la plataforma.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas demo -->
+    <div class="bg-blue-600 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
+                <div>
+                    <div class="text-4xl font-bold text-white">24</div>
+                    <div class="text-blue-100 mt-1">Voluntarios activos</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white">18</div>
+                    <div class="text-blue-100 mt-1">Pacientes acompañados</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white">156</div>
+                    <div class="text-blue-100 mt-1">Visitas realizadas</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold text-white">312</div>
+                    <div class="text-blue-100 mt-1">Horas de apoyo</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500">© 2024 Red de Acompañamiento Hospitalario. Todos los derechos reservados.</p>
+            <p class="text-sm text-gray-400 mt-2">MVP v1.0 - Sistema de prueba</p>
+        </div>
+    </footer>
+</div>
+
+<!-- ============================================
+     PÁGINA DE LOGIN
+     ============================================ -->
+<div id="page-login" class="hidden min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+        <div class="text-center">
+            <div class="mx-auto h-12 w-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-heart text-white text-xl"></i>
+            </div>
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Iniciar sesión</h2>
+            <p class="mt-2 text-sm text-gray-600">Accede al sistema de acompañamiento</p>
+        </div>
+        
+        <div class="mt-8 space-y-6">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                    <input type="email" id="login-email" class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="admin@hospital.org" value="admin@hospital.org">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="login-password" class="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="password" value="password">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label class="ml-2 block text-sm text-gray-900">Recordarme</label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500">¿Olvidaste tu contraseña?</a>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="doLogin()" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Entrar al sistema
+                </button>
+            </div>
+
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                <p class="text-xs text-gray-500 mb-2 font-semibold">Credenciales de demo:</p>
+                <div class="space-y-1 text-xs text-gray-600">
+                    <div class="flex justify-between"><span>Admin:</span> <span class="font-mono">admin@hospital.org / password</span></div>
+                    <div class="flex justify-between"><span>Coordinador:</span> <span class="font-mono">coordinator@hospital.org / password</span></div>
+                    <div class="flex justify-between"><span>Voluntario:</span> <span class="font-mono">volunteer@demo.org / password</span></div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="showPage('home')" class="text-sm text-gray-500 hover:text-gray-900">
+                    <i class="fas fa-arrow-left mr-1"></i> Volver al inicio
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     PÁGINA DE REGISTRO
+     ============================================ -->
+<div id="page-register" class="hidden min-h-screen bg-gray-50 py-12">
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="px-8 py-6 bg-blue-600">
+            <h2 class="text-2xl font-bold text-white">Registro de Voluntario</h2>
+            <p class="text-blue-100 mt-1">Únete a nuestra red de acompañamiento</p>
+        </div>
+        
+        <div class="p-8">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="María González">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Documento de identidad</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="12.345.678-9">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+                    <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="maria@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                    <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="+56 9 1234 5678">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="••••••••">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
+                    <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="••••••••">
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Foto de perfil</label>
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-400 cursor-pointer">
+                    <div class="space-y-1 text-center">
+                        <i class="fas fa-image text-gray-400 text-3xl"></i>
+                        <div class="flex text-sm text-gray-600 justify-center">
+                            <span class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">Subir archivo</span>
+                        </div>
+                        <p class="text-xs text-gray-500">PNG, JPG hasta 2MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <h4 class="font-medium text-gray-900 mb-2">Código de Conducta</h4>
+                <div class="text-sm text-gray-600 space-y-2 max-h-32 overflow-y-auto">
+                    <p>1. Mantener confidencialidad sobre la información de pacientes.</p>
+                    <p>2. No establecer contacto fuera de la plataforma con pacientes o familiares.</p>
+                    <p>3. Respetar los horarios y restricciones establecidas.</p>
+                    <p>4. Reportar cualquier incidente de manera inmediata.</p>
+                    <p>5. Mantener una conducta profesional y respetuosa en todo momento.</p>
+                </div>
+                <div class="mt-3 flex items-center">
+                    <input type="checkbox" id="accept-conduct" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="accept-conduct" class="ml-2 block text-sm text-gray-900">
+                        Acepto el código de conducta y las políticas de privacidad
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between">
+                <button onclick="showPage('home')" class="text-gray-500 hover:text-gray-700">Cancelar</button>
+                <button onclick="showNotification('Registro enviado para verificación', 'success'); showPage('home')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-medium">
+                    Completar registro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     DASHBOARD PRINCIPAL
+     ============================================ -->
+<div id="page-dashboard" class="hidden min-h-screen bg-gray-50">
+    <!-- Navbar del sistema -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('overview')">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">Red Hospitalaria</span>
+                    </div>
+                    <div class="hidden md:ml-8 md:flex md:space-x-6">
+                        <button onclick="showSection('overview')" class="nav-item text-blue-600 px-3 py-2 rounded-md text-sm font-medium border-b-2 border-blue-600" data-section="overview">Dashboard</button>
+                        <button onclick="showSection('patients')" class="nav-item text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-section="patients">Pacientes</button>
+                        <button onclick="showSection('volunteers')" class="nav-item text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-section="volunteers">Voluntarios</button>
+                        <button onclick="showSection('visits')" class="nav-item text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium" data-section="visits">Visitas</button>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-gray-400 hover:text-gray-500 relative">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-sm font-medium text-gray-900" id="user-name">Admin</div>
+                            <div class="text-xs text-gray-500" id="user-role">Administrador</div>
+                        </div>
+                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <button onclick="logout()" class="text-gray-400 hover:text-red-600">
+                            <i class="fas fa-sign-out-alt text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO: OVERVIEW -->
+    <div id="section-overview" class="section-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Panel de Control</h1>
+            <p class="mt-1 text-sm text-gray-500">Resumen del sistema - Hospital General de Prueba</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+            <div class="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('patients')">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-red-100 rounded-md p-3">
+                            <i class="fas fa-user-injured text-red-600 text-xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Pacientes Activos</dt>
+                                <dd class="text-3xl font-semibold text-gray-900">18</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm text-red-600 font-medium">5 sin asignar <i class="fas fa-arrow-right ml-1"></i></div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('volunteers')">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                            <i class="fas fa-hand-holding-heart text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Voluntarios</dt>
+                                <dd class="text-3xl font-semibold text-gray-900">24</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm text-blue-600 font-medium">20 verificados <i class="fas fa-arrow-right ml-1"></i></div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow cursor-pointer" onclick="showSection('visits')">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
+                            <i class="fas fa-calendar-check text-green-600 text-xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Visitas este mes</dt>
+                                <dd class="text-3xl font-semibold text-gray-900">47</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm text-green-600 font-medium">+12% vs mes anterior <i class="fas fa-arrow-up ml-1"></i></div>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 bg-yellow-100 rounded-md p-3">
+                            <i class="fas fa-exclamation-triangle text-yellow-600 text-xl"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Alertas</dt>
+                                <dd class="text-3xl font-semibold text-gray-900">2</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-5 py-3">
+                    <div class="text-sm text-yellow-600 font-medium">1 incidente abierto <i class="fas fa-arrow-right ml-1"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acciones rápidas y Alertas -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <div class="lg:col-span-2 bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Acciones rápidas</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="openModal('new-patient')" class="flex items-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-left">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-user-plus text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">Nuevo paciente</div>
+                            <div class="text-sm text-gray-500">Registrar ingreso</div>
+                        </div>
+                    </button>
+                    <button onclick="openModal('new-visit')" class="flex items-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors text-left">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-calendar-plus text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">Programar visita</div>
+                            <div class="text-sm text-gray-500">Asignar voluntario</div>
+                        </div>
+                    </button>
+                    <button onclick="showSection('volunteers')" class="flex items-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors text-left">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-user-check text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">Verificar voluntario</div>
+                            <div class="text-sm text-gray-500">3 pendientes</div>
+                        </div>
+                    </button>
+                    <button onclick="showSection('patients')" class="flex items-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-orange-500 hover:bg-orange-50 transition-colors text-left">
+                        <div class="bg-orange-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-clipboard-list text-orange-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900">Ver reportes</div>
+                            <div class="text-sm text-gray-500">Visitas de hoy</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Alertas recientes</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start p-3 bg-red-50 rounded-lg border border-red-100">
+                        <i class="fas fa-exclamation-circle text-red-500 mt-0.5 mr-3"></i>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-red-800">Incidente reportado</p>
+                            <p class="text-xs text-red-600 mt-1">Visita #124 - Voluntario reportó comportamiento inusual del paciente</p>
+                            <p class="text-xs text-gray-500 mt-1">Hace 2 horas</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+                        <i class="fas fa-clock text-yellow-500 mt-0.5 mr-3"></i>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-yellow-800">Visita sin check-in</p>
+                            <p class="text-xs text-yellow-600 mt-1">Voluntario J. Pérez no registró entrada - 10:00 hrs</p>
+                            <p class="text-xs text-gray-500 mt-1">Hace 4 horas</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <i class="fas fa-user-plus text-blue-500 mt-0.5 mr-3"></i>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-blue-800">Nuevo voluntario</p>
+                            <p class="text-xs text-blue-600 mt-1">C. Rodríguez completó registro - pendiente verificación</p>
+                            <p class="text-xs text-gray-500 mt-1">Hace 5 horas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de actividad reciente -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-medium text-gray-900">Actividad reciente</h3>
+                <button class="text-sm text-blue-600 hover:text-blue-800">Ver todo</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acción</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detalle</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Visita completada</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">M. González</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Paciente A. Martínez - 45 min</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hace 15 min</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paciente asignado</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Admin</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">R. López → J. Pérez (Voluntario)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hace 1 hora</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Check-in</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">L. Silva</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Inicio visita - Paciente C. Torres</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hace 2 horas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: PACIENTES -->
+    <div id="section-patients" class="section-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Gestión de Pacientes</h1>
+                <p class="mt-1 text-sm text-gray-500">18 pacientes activos en el sistema</p>
+            </div>
+            <button onclick="openModal('new-patient')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Nuevo paciente
+            </button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-4">
+            <input type="text" placeholder="Buscar paciente..." class="border border-gray-300 rounded-lg px-4 py-2 flex-grow max-w-md">
+            <select class="border border-gray-300 rounded-lg px-4 py-2">
+                <option>Todos los estados</option>
+                <option>Activos</option>
+                <option>Asignados</option>
+                <option>Sin asignar</option>
+                <option>Cerrados</option>
+            </select>
+            <select class="border border-gray-300 rounded-lg px-4 py-2">
+                <option>Todas las vulnerabilidades</option>
+                <option>Alta</option>
+                <option>Media</option>
+                <option>Baja</option>
+            </select>
+        </div>
+
+        <!-- Tabla de pacientes -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Paciente</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Edad/Sexo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vulnerabilidad</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Voluntario</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                    <span class="text-red-600 font-semibold">J.M</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">J. Martínez</div>
+                                    <div class="text-xs text-gray-500">Ingresado: 15/01/2024</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">67 años / M</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Alta</span></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Sin asignar</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-400">-</td>
+                        <td class="px-6 py-4">
+                            <button onclick="openModal('assign-volunteer')" class="text-blue-600 hover:text-blue-900 text-sm font-medium">Asignar</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                    <span class="text-blue-600 font-semibold">A.R</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">A. Rodríguez</div>
+                                    <div class="text-xs text-gray-500">Ingresado: 10/01/2024</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">54 años / F</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">Media</span></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Asignado</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-900">M. González</td>
+                        <td class="px-6 py-4">
+                            <button class="text-gray-600 hover:text-gray-900 text-sm font-medium mr-3">Ver</button>
+                            <button class="text-blue-600 hover:text-blue-900 text-sm font-medium">Editar</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                    <span class="text-green-600 font-semibold">C.T</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">C. Torres</div>
+                                    <div class="text-xs text-gray-500">Ingresado: 05/01/2024</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">72 años / M</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Baja</span></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Asignado</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-900">L. Silva</td>
+                        <td class="px-6 py-4">
+                            <button class="text-gray-600 hover:text-gray-900 text-sm font-medium mr-3">Ver</button>
+                            <button class="text-blue-600 hover:text-blue-900 text-sm font-medium">Editar</button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50 bg-red-50">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                    <span class="text-red-600 font-semibold">R.L</span>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">R. López</div>
+                                    <div class="text-xs text-gray-500">Ingresado: 18/01/2024</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">45 años / F</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Alta</span></td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Sin asignar</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-400">-</td>
+                        <td class="px-6 py-4">
+                            <button onclick="openModal('assign-volunteer')" class="text-blue-600 hover:text-blue-900 text-sm font-medium">Asignar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: VOLUNTARIOS -->
+    <div id="section-volunteers" class="section-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Voluntarios</h1>
+                <p class="mt-1 text-sm text-gray-500">24 registrados, 20 verificados, 4 pendientes</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Voluntario 1 -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl mr-4">
+                        👩
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">M. González</h3>
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Verificado</span>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                    <div class="flex justify-between"><span>Email:</span> <span class="text-gray-900">m.gonzalez@email.com</span></div>
+                    <div class="flex justify-between"><span>Teléfono:</span> <span class="text-gray-900">+56 9 1234 5678</span></div>
+                    <div class="flex justify-between"><span>Reputación:</span> <span class="text-green-600 font-semibold">98/100 ⭐</span></div>
+                </div>
+                <div class="border-t pt-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-500">Pacientes asignados:</span>
+                        <span class="font-semibold text-gray-900">2/2</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded hover:bg-gray-200 text-sm">Ver perfil</button>
+                        <button class="flex-1 bg-blue-100 text-blue-700 py-2 rounded hover:bg-blue-200 text-sm">Ver visitas</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voluntario 2 -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center text-2xl mr-4">
+                        👨
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">L. Silva</h3>
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Verificado</span>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                    <div class="flex justify-between"><span>Email:</span> <span class="text-gray-900">l.silva@email.com</span></div>
+                    <div class="flex justify-between"><span>Teléfono:</span> <span class="text-gray-900">+56 9 8765 4321</span></div>
+                    <div class="flex justify-between"><span>Reputación:</span> <span class="text-green-600 font-semibold">95/100 ⭐</span></div>
+                </div>
+                <div class="border-t pt-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-500">Pacientes asignados:</span>
+                        <span class="font-semibold text-gray-900">1/2</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <div class="mt-3 flex space-x-2">
+                        <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded hover:bg-gray-200 text-sm">Ver perfil</button>
+                        <button class="flex-1 bg-green-100 text-green-700 py-2 rounded hover:bg-green-200 text-sm">Disponible</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voluntario pendiente -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow border-2 border-yellow-200">
+                <div class="flex items-center mb-4">
+                    <div class="h-16 w-16 rounded-full bg-yellow-100 flex items-center justify-center text-2xl mr-4">
+                        👤
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">C. Rodríguez</h3>
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendiente</span>
+                    </div>
+                </div>
+                <div class="space-y-2 text-sm text-gray-600 mb-4">
+                    <div class="flex justify-between"><span>Registro:</span> <span class="text-gray-900">18/01/2024</span></div>
+                    <div class="flex justify-between"><span>Documento:</span> <span class="text-gray-900">Verificado ✓</span></div>
+                    <div class="flex justify-between"><span>Código conducta:</span> <span class="text-gray-900">Aceptado ✓</span></div>
+                </div>
+                <div class="border-t pt-4">
+                    <button onclick="showNotification('Voluntario verificado correctamente', 'success')" class="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 text-sm font-medium">
+                        Verificar ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO: VISITAS -->
+    <div id="section-visits" class="section-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Calendario de Visitas</h1>
+                <p class="mt-1 text-sm text-gray-500">Programación y seguimiento de acompañamiento</p>
+            </div>
+            <button onclick="openModal('new-visit')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Nueva visita
+            </button>
+        </div>
+
+        <!-- Calendario simplificado -->
+        <div class="bg-white shadow rounded-lg p-6 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Enero 2024</h3>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border rounded hover:bg-gray-50"><i class="fas fa-chevron-left"></i></button>
+                    <button class="px-3 py-1 border rounded hover:bg-gray-50"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-7 gap-2 text-center mb-2">
+                <div class="text-xs font-medium text-gray-500">Dom</div>
+                <div class="text-xs font-medium text-gray-500">Lun</div>
+                <div class="text-xs font-medium text-gray-500">Mar</div>
+                <div class="text-xs font-medium text-gray-500">Mié</div>
+                <div class="text-xs font-medium text-gray-500">Jue</div>
+                <div class="text-xs font-medium text-gray-500">Vie</div>
+                <div class="text-xs font-medium text-gray-500">Sáb</div>
+            </div>
+            
+            <div class="grid grid-cols-7 gap-2">
+                <div class="h-24 border rounded-lg p-1 bg-gray-50"></div>
+                <div class="h-24 border rounded-lg p-1">
+                    <div class="text-xs text-gray-400">1</div>
+                </div>
+                <div class="h-24 border rounded-lg p-1">
+                    <div class="text-xs text-gray-400">2</div>
+                    <div class="mt-1 bg-blue-100 text-blue-800 text-xs rounded px-1 py-0.5 truncate">10:00 - A. Rodríguez</div>
+                </div>
+                <div class="h-24 border rounded-lg p-1">
+                    <div class="text-xs text-gray-400">3</div>
+                    <div class="mt-1 bg-green-100 text-green-800 text-xs rounded px-1 py-0.5 truncate">14:00 - C. Torres</div>
+                </div>
+                <div class="h-24 border rounded-lg p-1 bg-blue-50 border-blue-200">
+                    <div class="text-xs font-bold text-blue-600">4</div>
+                    <div class="mt-1 bg-blue-200 text-blue-900 text-xs rounded px-1 py-0.5 truncate font-medium">09:00 - J. Martínez</div>
+                    <div class="mt-1 bg-purple-100 text-purple-800 text-xs rounded px-1 py-0.5 truncate">11:30 - R. López</div>
+                    <div class="mt-1 bg-yellow-100 text-yellow-800 text-xs rounded px-1 py-0.5 truncate">16:00 - M. Soto</div>
+                </div>
+                <div class="h-24 border rounded-lg p-1">
+                    <div class="text-xs text-gray-400">5</div>
+                </div>
+                <div class="h-24 border rounded-lg p-1">
+                    <div class="text-xs text-gray-400">6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Próximas visitas -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900">Próximas visitas (hoy)</h3>
+            </div>
+            <div class="divide-y divide-gray-200">
+                <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-clock text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-900">09:00 - 10:00</div>
+                            <div class="text-sm text-gray-500">J. Martínez (Paciente) - M. González (Voluntaria)</div>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Programada</span>
+                </div>
+                <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-900">10:30 - 11:15</div>
+                            <div class="text-sm text-gray-500">A. Rodríguez (Paciente) - L. Silva (Voluntario)</div>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completada</span>
+                </div>
+                <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div class="flex items-center">
+                        <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-hourglass-start text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-gray-900">11:30 - 12:30</div>
+                            <div class="text-sm text-gray-500">R. López (Paciente) - Por asignar</div>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Sin voluntario</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================
+     MODALES
+     ============================================ -->
+
+<!-- Modal: Nuevo Paciente -->
+<div id="modal-new-patient" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white fade-in">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Registrar nuevo paciente</h3>
+            <button onclick="closeModal('new-patient')" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre para mostrar</label>
+                    <input type="text" class="w-full border rounded-lg px-3 py-2" placeholder="J. Martínez">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre completo (confidencial)</label>
+                    <input type="text" class="w-full border rounded-lg px-3 py-2" placeholder="Juan Carlos Martínez">
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Edad</label>
+                    <input type="number" class="w-full border rounded-lg px-3 py-2" placeholder="67">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Sexo</label>
+                    <select class="w-full border rounded-lg px-3 py-2">
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Vulnerabilidad</label>
+                    <select class="w-full border rounded-lg px-3 py-2">
+                        <option value="high">Alta</option>
+                        <option value="medium">Media</option>
+                        <option value="low">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Restricciones / Observaciones</label>
+                <textarea class="w-full border rounded-lg px-3 py-2" rows="3" placeholder="Preferencia de género del voluntario, horarios, etc."></textarea>
+            </div>
+        </div>
+        <div class="flex justify-end space-x-3 mt-6">
+            <button onclick="closeModal('new-patient')" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+            <button onclick="closeModal('new-patient'); showNotification('Paciente registrado correctamente', 'success')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar paciente</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Asignar Voluntario -->
+<div id="modal-assign-volunteer" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white fade-in">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Asignar voluntario</h3>
+            <button onclick="closeModal('assign-volunteer')" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+            <p class="text-sm text-blue-800"><strong>Paciente:</strong> J. Martínez (67 años, Vulnerabilidad: Alta)</p>
+            <p class="text-xs text-blue-600 mt-1">Restricciones: Prefiere voluntaria mujer, horario mañana</p>
+        </div>
+        <div class="space-y-2 max-h-64 overflow-y-auto">
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-3">👩</div>
+                    <div>
+                        <div class="font-medium text-gray-900">M. González</div>
+                        <div class="text-xs text-gray-500">Disponible mañanas • 98/100 ⭐</div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-red-600 font-medium">2/2 pacientes</span>
+                </div>
+            </div>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer flex items-center justify-between border-blue-500 bg-blue-50">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center mr-3">👩</div>
+                    <div>
+                        <div class="font-medium text-gray-900">C. Fernández</div>
+                        <div class="text-xs text-gray-500">Disponible mañanas • 96/100 ⭐</div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-green-600 font-medium">1/2 pacientes</span>
+                    <div class="text-xs text-blue-600">✓ Compatible</div>
+                </div>
+            </div>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer flex items-center justify-between opacity-50">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center mr-3">👨</div>
+                    <div>
+                        <div class="font-medium text-gray-900">J. Pérez</div>
+                        <div class="text-xs text-gray-500">Disponible tardes • 94/100 ⭐</div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-gray-500">0/2 pacientes</span>
+                    <div class="text-xs text-red-600">✗ Género no preferido</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end space-x-3 mt-6">
+            <button onclick="closeModal('assign-volunteer')" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+            <button onclick="closeModal('assign-volunteer'); showNotification('Voluntario asignado correctamente', 'success')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Confirmar asignación</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Nueva Visita -->
+<div id="modal-new-visit" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white fade-in">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Programar nueva visita</h3>
+            <button onclick="closeModal('new-visit')" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Paciente</label>
+                <select class="w-full border rounded-lg px-3 py-2">
+                    <option>Seleccionar paciente...</option>
+                    <option>J. Martínez (Sin asignar)</option>
+                    <option>A. Rodríguez - M. González</option>
+                    <option>C. Torres - L. Silva</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Voluntario</label>
+                <select class="w-full border rounded-lg px-3 py-2">
+                    <option>Seleccionar voluntario...</option>
+                    <option>M. González (1/2 pacientes)</option>
+                    <option>L. Silva (1/2 pacientes)</option>
+                    <option>C. Fernández (1/2 pacientes)</option>
+                </select>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+                    <input type="date" class="w-full border rounded-lg px-3 py-2" value="2024-01-19">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+                    <input type="time" class="w-full border rounded-lg px-3 py-2" value="10:00">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Notas adicionales</label>
+                <textarea class="w-full border rounded-lg px-3 py-2" rows="2" placeholder="Instrucciones especiales..."></textarea>
+            </div>
+        </div>
+        <div class="flex justify-end space-x-3 mt-6">
+            <button onclick="closeModal('new-visit')" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Cancelar</button>
+            <button onclick="closeModal('new-visit'); showNotification('Visita programada correctamente', 'success')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Programar visita</button>
+        </div>
+    </div>
+</div>
+
+<!-- Notificaciones -->
+<div id="notification-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// Estado de la aplicación
+let currentUser = null;
+
+// Navegación entre páginas
+function showPage(pageName) {
+    // Ocultar todas las páginas
+    document.querySelectorAll('[id^="page-"]').forEach(el => {
+        el.classList.add('hidden');
+    });
+    
+    // Mostrar la página solicitada
+    const page = document.getElementById('page-' + pageName);
+    if (page) {
+        page.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+    
+    // Si es dashboard, mostrar overview por defecto
+    if (pageName === 'dashboard') {
+        showSection('overview');
+    }
+}
+
+// Navegación entre secciones del dashboard
+function showSection(sectionName) {
+    // Ocultar todas las secciones
+    document.querySelectorAll('.section-content').forEach(el => {
+        el.classList.add('hidden');
+    });
+    
+    // Mostrar la sección solicitada
+    const section = document.getElementById('section-' + sectionName);
+    if (section) {
+        section.classList.remove('hidden');
+    }
+    
+    // Actualizar navegación activa
+    document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+        el.classList.add('text-gray-500');
+        if (el.dataset.section === sectionName) {
+            el.classList.remove('text-gray-500');
+            el.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+        }
+    });
+}
+
+// Login simulado
+function doLogin() {
+    const email = document.getElementById('login-email').value;
+    
+    // Simular diferentes roles según el email
+    if (email.includes('admin')) {
+        currentUser = { name: 'Administrador', role: 'Admin', email: email };
+    } else if (email.includes('coordinator')) {
+        currentUser = { name: 'Coordinador Social', role: 'Coordinador', email: email };
+    } else {
+        currentUser = { name: 'Voluntario', role: 'Voluntario', email: email };
+    }
+    
+    // Actualizar UI
+    document.getElementById('user-name').textContent = currentUser.name;
+    document.getElementById('user-role').textContent = currentUser.role;
+    
+    showNotification('Bienvenido, ' + currentUser.name, 'success');
+    showPage('dashboard');
+}
+
+// Logout
+function logout() {
+    currentUser = null;
+    showNotification('Sesión cerrada', 'info');
+    showPage('home');
+}
+
+// Modales
+function openModal(modalName) {
+    const modal = document.getElementById('modal-' + modalName);
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeModal(modalName) {
+    const modal = document.getElementById('modal-' + modalName);
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+// Cerrar modal al hacer clic fuera
+window.onclick = function(event) {
+    if (event.target.classList.contains('fixed')) {
+        event.target.classList.add('hidden');
+    }
+}
+
+// Sistema de notificaciones
+function showNotification(message, type = 'info') {
+    const container = document.getElementById('notification-container');
+    const notification = document.createElement('div');
+    
+    const colors = {
+        success: 'bg-green-500',
+        error: 'bg-red-500',
+        warning: 'bg-yellow-500',
+        info: 'bg-blue-500'
+    };
+    
+    const icons = {
+        success: 'check-circle',
+        error: 'exclamation-circle',
+        warning: 'exclamation-triangle',
+        info: 'info-circle'
+    };
+    
+    notification.className = `${colors[type]} text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-2 fade-in`;
+    notification.innerHTML = `
+        <i class="fas fa-${icons[type]}"></i>
+        <span>${message}</span>
+    `;
+    
+    container.appendChild(notification);
+    
+    // Auto-eliminar después de 3 segundos
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.3s';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', function() {
+    showPage('home');
+});
+</script>
+
+</body>
+</html>
